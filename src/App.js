@@ -1,6 +1,7 @@
 
 import './index.css';
-import React, { useState } from "react"
+import React, { useState } from "react";
+import TodoItem from "./TodoItem"
 
 
 function App() {
@@ -23,6 +24,20 @@ function addItem(){
    
 setInputText('')
 }
+
+function deleteItem(id){
+  setItems( prevItems =>{
+    return prevItems.filter(
+      (item, index) => {
+
+        return index !== id
+
+    }
+    )
+  })
+}
+
+
   return<div className="App">
       <div className="container">
       <div className="header">
@@ -33,7 +48,14 @@ setInputText('')
     <button onClick={addItem} className="btn" >Add</button>
   </div>
   <ul>
-    {todoItems.map(item => <li>{item}</li>)}
+    {todoItems.map(( todoItems, index )=> (
+      <TodoItem
+      key={index}
+      id={index}
+      text={todoItems}
+      onChecked={deleteItem}
+       />
+    ))}
   </ul>
       </div>
     </div>
